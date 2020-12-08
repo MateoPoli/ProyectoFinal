@@ -7,7 +7,7 @@ const todoController = require("../controller/todo.controller");
 
 // get all todos
 router.get("/all", (req, res) => {
-  db.Todo.findAll().then(todos => res.send(todos));
+  db.Todo.findAll().then(todo => res.send(todo));
 });
 
 // get single todo by id
