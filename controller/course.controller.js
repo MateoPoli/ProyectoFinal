@@ -14,11 +14,10 @@ exports.saveCourse = (req, res, next) => {
     }
 
     db.Course.create({
+        idCourse: req.body.idCourse,
         name: req.body.name,
         professor: req.body.professor,
         credits: +req.body.credits,
-        hours: +req.body.hours,
-        semester: +req.body.semester,
         StudentIdStudent: +req.body.idStudent
     }).then(data => {
         res.status(201).json({ status: 'sucess', message: 'User create' });

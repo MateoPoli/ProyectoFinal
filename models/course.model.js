@@ -1,9 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
     const Course = sequelize.define("Course", {
       idCourse: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.STRING,
         primaryKey: true,
-        autoIncrement: true
       },
       name: {
         type: DataTypes.STRING,
@@ -32,15 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       credits: {
         type: DataTypes.BIGINT,
-        allowNull: false,
-      },
-      hours: {
-        type: DataTypes.BIGINT,
-        allowNull: false,
-      },
-      semester: {
-        type: DataTypes.BIGINT,
-        allowNull: false,
+        allowNull: false
       }
     });
 
@@ -49,6 +40,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: {
           allowNull: false,
         },
+      });
+    };
+
+    Course.associate = (models) =>{
+      Course.hasMany(models.Score, {
+        onDelete: "cascade",
       });
     };
 

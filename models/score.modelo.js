@@ -24,5 +24,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       }
     });
+
+    Score.associate = (models) =>{
+      Score.belongsTo(models.Course, {
+        foreignKey: {
+          allowNull: false,
+        },
+      });
+    };
+    
     return Score;
   };

@@ -7,7 +7,9 @@ const courseController = require("../controller/course.controller");
 
 // get all todos
 router.get("/all", (req, res) => {
-  db.Course.findAll().then(todos => res.send(todos));
+  db.Course.findAll({
+    include: [db.Score]
+  }).then(students => res.send(students));
 });
 
 // get single todo by id
@@ -23,6 +25,13 @@ router.get("/find/:id", (req, res) => {
 router.post(
   "/new",
   [
+    body("idCourse")
+      .matches(/^[A-Z]{3}[0-9]{6,9}$/, "i")
+      .withMessage("El Id tiene que ser ,,,,")
+      .exists()
+      .withMessage("El id de la materia es requerido")
+      .trim()
+      .escape(),
     body("name")
       .isLength({ min: 3, max: 50 })
       .withMessage("Ingresa el nombre de la materia;el nombre debe ser de minimo 3 caracteres y maximo 50")
@@ -47,31 +56,11 @@ router.post(
       .matches(/^[0-9]+$/, "i")
       .withMessage("El numero de créditos de la materia debe ser de carácter numérico")
       .trim()
-      .escape(),
-    body("hours")
-      .exists()
-      .withMessage("Ingresa el numero de horas de la materia")
-      .matches(/^[0-9]+$/, "i")
-      .withMessage("El numero de horas de la materia debe ser de carácter numérico")
-      .trim()
-      .escape(),
-    body("semester")
-      .exists()
-      .withMessage("Ingresa el semestre en el que estas cursando la materia")
-      .matches(/^[0-9]+$/, "i")
-      .withMessage("El semestre en el que estas cursando la materia debe ser de carácter numérico")
-      .trim()
-      .escape(),
-    body("idStudent")
-      .matches(/^[0-9]+$/, "i")
-      .withMessage("Deben ser carecteres numericos")
-      .exists()
-      .withMessage("El id es requerido")
-      .trim()
       .escape()
   ],
   courseController.saveCourse
 );
+
 
 // delete todo
 router.delete("/delete/:id", (req, res) => {

@@ -14,10 +14,11 @@ exports.saveScore = (req, res, next) => {
     }
 
     db.Score.create({
-        scoreOne: req.body.scoreOne,
-        scoreTwo: req.body.scoreTwo,
-        scoreTree: req.body.scoreTree,
-        scoreFour: req.body.scoreFour,
+        scoreOne: + req.body.scoreOne,
+        scoreTwo: + req.body.scoreTwo,
+        scoreTree: + req.body.scoreTree,
+        scoreFour: + req.body.scoreFour,
+        CourseIdCourse: req.body.idCourse
     }).then(data => {
         res.status(201).json({ status: 'sucess', message: 'User create' });
 

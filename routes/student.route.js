@@ -7,10 +7,20 @@ const studentController = require("../controller/student.controller");
 
 // get all todos
 router.get("/all", (req, res) => {
-    db.Student.findAll({
-      include: [db.Course]
-    }).then(students => res.send(students));
-  });
+  db.Student.findAll({
+    include: [
+      {
+        model: db.Course,
+        include: [
+          {
+            model: db.Score
+          }
+        ]
+      }
+    ]
+  }).then(students => res.send(students));    
+}
+);
 
   // get single todo by id
   router.get("/find/:id", (req, res) => {
