@@ -7,9 +7,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 /*Rutas de mi proyecto*/
-const apiRoutes = require("./routes/apiRoutes");
-app.use("/api", apiRoutes);
-
 const courseRoutes = require("./routes/course.route");
 app.use("/course", courseRoutes);
 

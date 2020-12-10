@@ -22,6 +22,14 @@ module.exports = (sequelize, DataTypes) => {
       scoreFour: {
         type: DataTypes.FLOAT,
         allowNull: false,
+      },
+      average: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+      state: {
+        type: DataTypes.STRING,
+        allowNull: false
       }
     });
 
@@ -32,6 +40,6 @@ module.exports = (sequelize, DataTypes) => {
         },
       });
     };
-    
+
     return Score;
   };

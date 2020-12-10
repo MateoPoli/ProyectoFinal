@@ -13,11 +13,18 @@ exports.saveScore = (req, res, next) => {
         throw error;
     }
 
+    const av = ( (+req.body.scoreOne) + (+req.body.scoreTwo) + (+req.body.scoreTree) + (+req.body.scoreFour))/4;
+    var st = "";
+    if (av>=3.0) st = "approved";
+    else st = "reproved";
+
     db.Score.create({
         scoreOne: + req.body.scoreOne,
         scoreTwo: + req.body.scoreTwo,
         scoreTree: + req.body.scoreTree,
         scoreFour: + req.body.scoreFour,
+        average: av,
+        state: st,
         CourseIdCourse: req.body.idCourse
     }).then(data => {
         res.status(201).json({ status: 'sucess', message: 'User create' });
