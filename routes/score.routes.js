@@ -50,7 +50,19 @@ router.post(
       .exists()
       .withMessage("La calificacion 4 es requerido")
       .trim()
-      .escape()
+      .escape(),
+    body("idCourse")
+      .matches(/^[A-Z]{3}[0-9]{6,9}$/, "i")
+      .withMessage("Foreinkey")
+      .exists()
+      .withMessage("Foreinkeyes requerida")
+      .custom((value, { req, loc, path }) => {
+        return db.Course.findOne({ where: { idCourse: value } }).then(typeDoc => {
+          if (!typeDoc) {
+            return Promise.reject('La categoria no existe.');
+          }
+        });
+      })
   ],
   scoreController.saveScore
 );
@@ -68,18 +80,6 @@ router.delete("/delete/:id", (req, res) => {
 
 router.put("/edit", (req, res) => {
   db.Score.update(
-    {
-      calificacion1: req.body.calificacion1
-    },
-    {
-        calificacion2: req.body.calificacion2
-    },
-    {
-        calificacion3: req.body.calificacion3
-    },
-    {
-        calificacion4: req.body.calificacion4
-    },
     {
       where: { id: req.body.id }
     }

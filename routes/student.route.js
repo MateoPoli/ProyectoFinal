@@ -26,8 +26,18 @@ router.get("/all", (req, res) => {
   router.get("/find/:id", (req, res) => {
     db.Student.findAll({
       where: {
-        id_student: req.params.id
-      }
+        idStudent: req.params.id
+      },
+      include: [
+        {
+          model: db.Course,
+          include: [
+            {
+              model: db.Score
+            }
+          ]
+        }
+      ]
     }).then(student => res.send(student));
   });
 
@@ -40,6 +50,13 @@ router.post(
       .withMessage("Deben ser carecteres numericos")
       .exists()
       .withMessage("El id es requerido")
+      .custom((value, { req, loc, path }) => {
+        return db.Student.findOne({ where: { idStudent: value }}).then(typeDoc => {
+            if (typeDoc) {
+              return Promise.reject('El estudiate ya existe.');
+            }
+        });
+      })
       .trim()
       .escape(),
     body("name")

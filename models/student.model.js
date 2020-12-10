@@ -1,3 +1,5 @@
+const { Sequelize } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
     const Student = sequelize.define("Student", {
       idStudent: {
@@ -40,7 +42,17 @@ module.exports = (sequelize, DataTypes) => {
                'El correo electronico no es correcto'
           }
         }
-      }
+      },
+      is_active: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
+      },
+      secret: {
+        allowNull: false,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
+      },
     });
 
     

@@ -1,3 +1,5 @@
+const { Sequelize } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
     const Course = sequelize.define("Course", {
       idCourse: {
@@ -32,7 +34,17 @@ module.exports = (sequelize, DataTypes) => {
       credits: {
         type: DataTypes.BIGINT,
         allowNull: false
-      }
+      },
+      is_active: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
+      },
+      secret: {
+        allowNull: false,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
+      },
     });
 
     Course.associate = (models) =>{

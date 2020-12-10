@@ -4,6 +4,7 @@ const db = require("../models");
 const { body } = require("express-validator");
 const { validationResult } = require("express-validator");
 const courseController = require("../controller/course.controller");
+const studentModel = require("../models/student.model");
 
 // get all todos
 router.get("/all", (req, res) => {
@@ -16,10 +17,11 @@ router.get("/all", (req, res) => {
 router.get("/find/:id", (req, res) => {
   db.Course.findAll({
     where: {
-      id: req.params.id
-    }
+      idCourse: req.params.id
+    },
+    include: [db.Score]
   }).then(todo => res.send(todo));
-});
+});   
 
 // post new todo
 router.post(
@@ -30,6 +32,13 @@ router.post(
       .withMessage("El Id tiene que ser ,,,,")
       .exists()
       .withMessage("El id de la materia es requerido")
+      .custom((value, { req, loc, path }) => {
+        return db.Course.findOne({ where: { idCourse: value } }).then(typeDoc => {
+          if (typeDoc) {
+            return Promise.reject('La categoria ya existe.');
+          }
+        });
+      })
       .trim()
       .escape(),
     body("name")
@@ -56,7 +65,21 @@ router.post(
       .matches(/^[0-9]+$/, "i")
       .withMessage("El numero de créditos de la materia debe ser de carácter numérico")
       .trim()
-      .escape()
+      .escape(),
+    body("idStudent")
+      .matches(/^[0-9]+$/, "i")
+      .withMessage("Foreinkey")
+      .exists()
+      .withMessage("Foreinkeyes requerida")
+      .custom((value, { req, loc, path }) => {
+        return db.Student.findOne({ where: { idStudent: value } }).then(typeDoc => {
+          if (!typeDoc) {
+            return Promise.reject('La categoria no existe.');
+          }
+        });
+      })
+      .trim()
+      .escape(),
   ],
   courseController.saveCourse
 );
@@ -66,7 +89,7 @@ router.post(
 router.delete("/delete/:id", (req, res) => {
   db.Course.destroy({
     where: {
-      id: req.params.id
+      idCourse: req.params.id
     }
   }).then(() => res.send("success"));
 });
