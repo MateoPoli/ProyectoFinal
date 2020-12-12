@@ -19,9 +19,9 @@ exports.saveStudent = (req, res, next) => {
         age: +req.body.age,
         email: req.body.email,
     }).then(data => {
-        res.status(201).json({ status: 'sucess', message: 'User create' });
+        res.status(201).json({ status: 'sucess', message: 'Student create' });
     }).catch(error => {
-        res.status(500).json({ status: 'fail', message: 'Uups algo fallo, verifique si el id esta bien ingresado' });
+        res.status(500).json({ status: 'Student create failed', message: 'Excellent, you have broken it' });
     });
 
 };

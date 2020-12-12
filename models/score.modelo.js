@@ -10,20 +10,42 @@ module.exports = (sequelize, DataTypes) => {
     scoreOne: {
       type: DataTypes.FLOAT,
       allowNull: false,
-
+      validate: {
+        is:{
+            args: /^[0-9]+([.][0-9]+)?$/,
+            msg: 'The score one must be float  '
+        }
+      }
     },
     scoreTwo: {
       type: DataTypes.FLOAT,
       allowNull: false,
-
+      validate: {
+        is:{
+            args: /^[0-9]+([.][0-9]+)?$/,
+            msg: 'The score two must be float  '
+        }
+      }
     },
     scoreTree: {
       type: DataTypes.FLOAT,
       allowNull: false,
+      validate: {
+        is:{
+            args: /^[0-9]+([.][0-9]+)?$/,
+            msg: 'The score three must be float  '
+        }
+      }
     },
     scoreFour: {
       type: DataTypes.FLOAT,
       allowNull: false,
+      validate: {
+        is:{
+            args: /^[0-9]+([.][0-9]+)?$/,
+            msg: 'The score four must be float  '
+        }
+      }
     },
     average: {
       type: DataTypes.FLOAT,

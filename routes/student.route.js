@@ -47,39 +47,39 @@ router.post(
   [
     body("idStudent")
       .matches( /^[0-9]+$/, "i")
-      .withMessage("Deben ser carecteres numericos")
+      .withMessage("The student id must be numbers")
       .exists()
-      .withMessage("El id es requerido")
+      .withMessage("The student id is required")
       .custom((value, { req, loc, path }) => {
         return db.Student.findOne({ where: { idStudent: value }}).then(typeDoc => {
             if (typeDoc) {
-              return Promise.reject('El estudiate ya existe.');
+              return Promise.reject('The student is already');
             }
         });
       })
       .trim()
       .escape(),
     body("name")
-      .isLength({ min: 2, max: 80 })
-      .withMessage("El nombre es de minimo 2 caracteres, maximo 80")
+      .isLength({ min: 10, max: 20 })
+      .withMessage("The student's name is a minimum of 10 characters, maximum 20")
       .matches(/^[A-Za-z0-9_\s]+$/, "i")
-      .withMessage("El nombre debe ser alfabetico")
+      .withMessage("The student´s name must containt only letters")
       .exists()
-      .withMessage("El nombre es requerido")
+      .withMessage("The student´s name is require")
       .trim()
       .escape(),
     body("age")
       .matches( /^[0-9]+$/, "i")
-      .withMessage("Deben ser carecteres numericos")
+      .withMessage("The student's age must be numeric characters")
       .exists()
-      .withMessage("La edad es requerida")
+      .withMessage("The student´s age is required")
       .trim()
       .escape(),
     body("email")
       .matches(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/, "i")
-      .withMessage("Caracter invalido")
+      .withMessage("Email invalid")
       .exists()
-      .withMessage("El correo electronico es requerido")
+      .withMessage("Email is required")
       .trim()
       .escape()
   ],

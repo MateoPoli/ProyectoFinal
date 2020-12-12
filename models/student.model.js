@@ -10,11 +10,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          max: 60,
-          min: 2,
+          max: 20,
+          min: 10,
           is:{
-              args: /^[A-Za-z0-9_\s]+$/,
-              msg: 'El nombre no es correcto'
+              args: /^[A-Za-z\s]+$/,
+              msg: "The student´s name must containt only letters"
           }
         }
       },
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
           min: 2,
           is:{
               args: /^[0-9]+$/,
-              msg: 'La edad no es correcta'
+              msg: 'The student´s age musbe only numbers'
           }
         }
       },
@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
           is:{
               args: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/,
               msg:
-               'El correo electronico no es correcto'
+               "the email is wrong"
           }
         }
       },

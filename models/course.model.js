@@ -10,11 +10,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          max: 50,
-          min: 3,
+          max: 20,
+          min: 10,
           is:{
               args: /^[A-Za-z0-9_\u00f1\u00d1\s]+$/,
-              msg: 'El nombre debe ser alfanumerico'
+              msg: 'The course´s name must be alphanumeric'
           }
         }
       },
@@ -22,18 +22,24 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          max: 80,
-          min: 2,
+          max: 20,
+          min: 8,
           is:{
               args: /^[A-Za-z\s]+$/,
               msg:
-               'El nombre del profesor debe contener solo letras'
+               "The teacher´s name must contain only letters"
           }
         }
       },
       credits: {
         type: DataTypes.BIGINT,
-        allowNull: false
+        allowNull: false,
+        validate: {
+          is:{
+              args: /^[0-9]+$/,
+              msg: 'The score one must be float  '
+          }
+        }
       },
       is_active: {
         type: DataTypes.BOOLEAN,

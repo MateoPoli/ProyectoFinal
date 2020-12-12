@@ -20,8 +20,10 @@ exports.saveCourse = (req, res, next) => {
         credits: +req.body.credits,
         StudentIdStudent: +req.body.idStudent
     }).then(data => {
-        res.status(201).json({ status: 'sucess', message: 'User create' });
+        res.status(201).json({ status: 'sucess', message: 'Course create' });
     }).catch(error => {
-        res.status(500).json({ status: 'fail', message: 'Uups algo fallo, verifique si el id esta bien ingresado' });
+        res.status(500).json({ status: 'Course create failed', message: 'Excellent, you have broken it' });
     });
 };
+
+

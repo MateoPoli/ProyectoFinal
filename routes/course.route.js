@@ -10,7 +10,7 @@ const studentModel = require("../models/student.model");
 router.get("/all", (req, res) => {
   db.Course.findAll({
     include: [db.Score]
-  }).then(students => res.send(students));
+  }).then(courses => res.send(courses));
 });
 
 // get single todo by id
@@ -20,7 +20,7 @@ router.get("/find/:id", (req, res) => {
       idCourse: req.params.id
     },
     include: [db.Score]
-  }).then(todo => res.send(todo));
+  }).then(courses => res.send(courses));
 });   
 
 // post new todo
@@ -28,53 +28,53 @@ router.post(
   "/new",
   [
     body("idCourse")
-      .matches(/^[A-Z]{3}[0-9]{6,9}$/, "i")
-      .withMessage("El Id tiene que ser ,,,,")
+      .matches(/^[A-Z]{3}[0-9]{6,15}$/, "i")
+      .withMessage("Course id must contain the following format: course code + student id")
       .exists()
-      .withMessage("El id de la materia es requerido")
+      .withMessage("The course id is required")
       .custom((value, { req, loc, path }) => {
         return db.Course.findOne({ where: { idCourse: value } }).then(typeDoc => {
           if (typeDoc) {
-            return Promise.reject('La categoria ya existe.');
+            return Promise.reject('The course id already exists');
           }
         });
       })
       .trim()
       .escape(),
     body("name")
-      .isLength({ min: 3, max: 50 })
-      .withMessage("Ingresa el nombre de la materia;el nombre debe ser de minimo 3 caracteres y maximo 50")
+      .isLength({ min: 10, max: 20 })
+      .withMessage("The course´s name must be a minimum of 10 characters and a maximum of 20")
       .matches(/^[A-Za-z0-9_\u00f1\u00d1\s]+$/, "i")
-      .withMessage("El nombre de la materia puede ser alfanumerico")
+      .withMessage("The course´s name must be alphanumeric")
       .exists()
-      .withMessage("El nombre de la materia es requerido")
+      .withMessage("The course´s name is required")
       .trim()
       .escape(),
     body("professor")
-      .isLength({ min: 3, max: 50 })
-      .withMessage("Ingresa el nombre del profesor; el nombre debe ser de minimo 3 caracteres y maximo 50")
+      .isLength({ min: 8, max: 20 })
+      .withMessage("The teacher´s name must be a minimum of 8 characters and a maximum of 20")
       .matches(/^[A-Za-z\s]+$/, "i")
-      .withMessage("El nombre de la materia debe contener solo letras")
+      .withMessage("The teacher´s name must contain only letters")
       .exists()
-      .withMessage("El nombre de la materia es requerido")
+      .withMessage("The teacher´s name is required")
       .trim()
       .escape(),
     body("credits")
-      .exists()
-      .withMessage("Ingresa el numero de creditos de la materia")
       .matches(/^[0-9]+$/, "i")
-      .withMessage("El numero de créditos de la materia debe ser de carácter numérico")
+      .withMessage("Course credits must be numeric")
+      .exists()
+      .withMessage("The amount of course credits is required")
       .trim()
       .escape(),
     body("idStudent")
       .matches(/^[0-9]+$/, "i")
-      .withMessage("Foreinkey")
+      .withMessage("The student id must be numbers")
       .exists()
-      .withMessage("Foreinkeyes requerida")
+      .withMessage("The Student id is required")
       .custom((value, { req, loc, path }) => {
         return db.Student.findOne({ where: { idStudent: value } }).then(typeDoc => {
           if (!typeDoc) {
-            return Promise.reject('La categoria no existe.');
+            return Promise.reject('Student id does not exist');
           }
         });
       })

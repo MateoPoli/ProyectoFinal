@@ -27,9 +27,9 @@ exports.saveScore = (req, res, next) => {
         state: st,
         CourseIdCourse: req.body.idCourse
     }).then(data => {
-        res.status(201).json({ status: 'sucess', message: 'User create' });
+        res.status(201).json({ status: 'sucess', message: 'Score create' });
 
     }).catch(error => {
-        res.status(500).json({ status: 'fail', message: 'Error!' });
+        res.status(500).json({ status: 'Score create failed', message: 'Excellent, you have broken it' });
     })
 };

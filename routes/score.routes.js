@@ -25,41 +25,41 @@ router.post(
   [
     body("scoreOne")
       .matches(/^[0-9]+([.][0-9]+)?$/, "i")
-      .withMessage("La calificacion debe estar en decimales")
+      .withMessage("The score one must be float")
       .exists()
-      .withMessage("La calificacion 1 es requerido")
+      .withMessage("The score one is required")
       .trim()
       .escape(),
     body("scoreTwo")
       .matches(/^[0-9]+([.][0-9]+)?$/, "i")
-      .withMessage("La calificacion debe estar en decimales")
+      .withMessage("The score two must be float")
       .exists()
-      .withMessage("La calificacion 2 es requerido")
+      .withMessage("The score two is required")
       .trim()
       .escape(),
     body("scoreTree")
       .matches(/^[0-9]+([.][0-9]+)?$/, "i")
-      .withMessage("La calificacion debe estar en decimales")
+      .withMessage("The score three must be float")
       .exists()
-      .withMessage("La calificacion 3 es requerido")
+      .withMessage("The score three is required")
       .trim()
       .escape(),
     body("scoreFour")
       .matches(/^[0-9]+([.][0-9]+)?$/, "i")
-      .withMessage("La calificacion debe estar en decimales")
+      .withMessage("The score four must be float")
       .exists()
-      .withMessage("La calificacion 4 es requerido")
+      .withMessage("The score four is required")
       .trim()
       .escape(),
     body("idCourse")
-      .matches(/^[A-Z]{3}[0-9]{6,9}$/, "i")
-      .withMessage("Foreinkey")
+      .matches(/^[A-Z]{3}[0-9]{6,15}$/, "i")
+      .withMessage("Course id must contain the following format: course code + student id")
       .exists()
-      .withMessage("Foreinkeyes requerida")
+      .withMessage("The course id is required")
       .custom((value, { req, loc, path }) => {
         return db.Course.findOne({ where: { idCourse: value } }).then(typeDoc => {
           if (!typeDoc) {
-            return Promise.reject('La categoria no existe.');
+            return Promise.reject('The course id already exists');
           }
         });
       })
