@@ -29,4 +29,9 @@ Configurar el archivo **../config/config.json** con los datos de la intancia loc
   ##### Diagrama de clases BD.
   
   ![SCHOOL_GRADES_MANAGER_DIG](https://user-images.githubusercontent.com/70857130/102020951-76816d80-3d4a-11eb-952b-d26ccf263fc8.png)
+  
+  ---
+  - #### RUTAS
+ `Route localhost: 3000/students/  `
+
 
