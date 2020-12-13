@@ -10,9 +10,9 @@ Inicializar la base de datos en MySql Workbench con los siguientes comandos:
 DROP DATABASE IF EXISTS SCHOOL_GRADES_MANAGER;
 CREATE DATABASE SCHOOL_GRADES_MANAGER;
 
-Configurar el archivo** ../config/config.json** con los datos de la intancia local de MySQL
+Configurar el archivo **../config/config.json** con los datos de la intancia local de MySQL
 
-   "development": {
+   **"development"**: {
    
     "username": "root",  // "nombre del usuario"
     "password": "mysql",  // "Contraseña"
