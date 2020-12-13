@@ -1,7 +1,7 @@
 ### GESTOR DE CALIFICACIONES ESCOLARES Y UNIVERSITARIAS.
 
 
-- #### Objetivo General
+- #### OBJETIVO GENERAL
 Desarrollar un sistema integral de gestión de materias y calificaciones, que mejore y facilite los procesos académicos a los estudiantes.
 
 ---
