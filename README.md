@@ -32,7 +32,15 @@ Configurar el archivo **../config/config.json** con los datos de la intancia loc
   
   ---
 - #### RUTAS
+##### Estudiantes
+
  `Route localhost: 3000/students/  `
- > "Crear un nuevo estudiante:  Route GET localhost: 3000/students/new"
+ > "Crear un nuevo estudiante:  Route POST localhost: 3000/students/new"
+    **Ejemplo:** {
+    "idStudent": 1214748653,
+    "name": "mateo presiga",
+    "age": 18,
+    "email": "mateo@presiga.com"
+    } 
 		
 
