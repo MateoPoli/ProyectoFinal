@@ -10,6 +10,7 @@ Desarrollar un sistema integral de gestión de materias y calificaciones, que me
 Inicializar la base de datos en MySql Workbench con los siguientes comandos:
 
  • DROP DATABASE IF EXISTS SCHOOL_GRADES_MANAGER
+ 
  • CREATE DATABASE SCHOOL_GRADES_MANAGER
 
 
