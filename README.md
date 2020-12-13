@@ -4,7 +4,7 @@
 - #### Objetivo General
 Desarrollar un sistema integral de gestión de materias y calificaciones, que mejore y facilite los procesos académicos a los estudiantes.
 
-##### CONFIGURACIÓN DE LA BASE DE DATOS SQL.
+- ##### CONFIGURACIÓN DE LA BASE DE DATOS SQL.
 Inicializar la base de datos en MySql Workbench con los siguientes comandos:
 
 DROP DATABASE IF EXISTS SCHOOL_GRADES_MANAGER;
