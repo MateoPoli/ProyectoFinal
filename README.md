@@ -46,11 +46,11 @@ Configurar el archivo **../config/config.json** con los datos de la intancia loc
     
     } 
   
-  > "Listar estudiantes:  Route GET localhost: 3000/students/all/"
+  <? Listar estudiantes:  Route GET localhost: 3000/students/all/">
   
-  > "Buscar un estudiante:  Route GET localhost: 3000/students/find/:id"
+   Buscar un estudiante:  Route GET localhost: 3000/students/find/:id"
   
-  > "Eliminar un estudiante:  Route DELETE localhost: 3000/students/:id"
+   "Eliminar un estudiante:  Route DELETE localhost: 3000/students/:id"
   
-  > "Editar un estudiante:  Route DELETE localhost: 3000/edit"
+   "Editar un estudiante:  Route DELETE localhost: 3000/edit"?>
 
