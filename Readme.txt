@@ -5,8 +5,8 @@ En este proyecto se busca implementar los conceptos que se consultaron y se vier
 BASE DE DATOS
 
 Inicializar la base de datos en MySql Workbench con los siguientes comandos:
-              DROP DATABASE IF EXISTS best_todo_ever; -> si existe la base de datos la elimina
-              CREATE DATABASE best_todo_ever;  -> Crea la base de datos
+              DROP DATABASE IF EXISTS SCHOOL_GRADES_MANAGER; // si existe la base de datos la elimina
+              CREATE DATABASE best_todo_ever;  // Crea la base de datos
 
 RUTAS
 

@@ -78,13 +78,53 @@ router.delete("/delete/:id", (req, res) => {
 
 // edit a todo
 
-router.put("/edit", (req, res) => {
-  db.Score.update(
-    {
-      where: { id: req.body.id }
-    }
-  ).then(() => res.send("success"));
-});
+router.put(
+  "/edit",
+  [
+    body("scoreOne")
+      .matches(/^[0-9]+([.][0-9]+)?$/, "i")
+      .withMessage("The score one must be float")
+      .exists()
+      .withMessage("The score one is required")
+      .trim()
+      .escape(),
+    body("scoreTwo")
+      .matches(/^[0-9]+([.][0-9]+)?$/, "i")
+      .withMessage("The score two must be float")
+      .exists()
+      .withMessage("The score two is required")
+      .trim()
+      .escape(),
+    body("scoreTree")
+      .matches(/^[0-9]+([.][0-9]+)?$/, "i")
+      .withMessage("The score three must be float")
+      .exists()
+      .withMessage("The score three is required")
+      .trim()
+      .escape(),
+    body("scoreFour")
+      .matches(/^[0-9]+([.][0-9]+)?$/, "i")
+      .withMessage("The score four must be float")
+      .exists()
+      .withMessage("The score four is required")
+      .trim()
+      .escape(),
+    body("idCourse")
+      .matches(/^[A-Z]{3}[0-9]{6,15}$/, "i")
+      .withMessage("Course id must contain the following format: course code + student id")
+      .exists()
+      .withMessage("The course id is required")
+      .custom((value, { req, loc, path }) => {
+        return db.Course.findOne({ where: { idCourse: value } }).then(typeDoc => {
+          if (!typeDoc) {
+            return Promise.reject('Course id does not exist');
+          }
+        });
+      })
+  ],
+  scoreController.updateScore
+
+);
 
 
 module.exports = router;

@@ -27,3 +27,29 @@ exports.saveCourse = (req, res, next) => {
 };
 
 
+exports.updateCourse = (req, res, next) => {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        const error = new Error('Validation failed.');
+        error.statusCode = 500;
+        error.data = errors.array();
+        throw error;
+    }
+
+    db.Course.update({
+        name: req.body.name,
+        professor: req.body.professor,
+        credits: +req.body.credits,
+    },
+    {
+        where: { idCourse: req.body.idCourse }
+    }
+
+    ).then(data => {
+        res.status(201).json({ status: 'sucess', message: 'Course update' });
+    }).catch(error => {
+        res.status(500).json({ status: 'Course update failed', message: 'Excellent, you have broken it' });
+    });
+};
